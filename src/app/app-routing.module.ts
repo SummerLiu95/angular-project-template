@@ -1,7 +1,24 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-const routes: Routes = [];
+import { LoginComponent } from './workspace/login/login.component';
+import { NotFoundComponent } from './workspace/not-found/not-found.component';
+
+const routes: Routes = [
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
+    path: '',
+    redirectTo: '/login',
+    pathMatch: 'full'
+  },
+  {
+    path: '**',
+    component: NotFoundComponent
+  }
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
