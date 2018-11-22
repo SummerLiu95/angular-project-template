@@ -1,10 +1,56 @@
 # FrontEndProjectStandardDemo
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.0.4.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.0.3.
 
 
 
 ## 项目目录说明
+
+|____ tool
+|              |
+|              |____ animations
+|              |
+|              |____ components
+|              |
+|              |____ pipes
+|              |
+|              |____ tool.module.ts
+|
+|____ workspace
+|              |
+|              |____ login
+|              |
+|              |____ main
+|              |
+|              |____ not-found
+|              |
+|              |____ workspace.component.html
+|              |
+|              |____ workspace.component.scss
+|              |
+|              |____ workspace.component.spec.ts
+|              |
+|              |____ workspace.component.ts
+|              |
+|              |____ workspace.module.ts
+|              |
+|              |____ workspace-routing.module.ts
+|
+|____ app.component.html
+|
+|____ app.component.scss
+|
+|____ app.component.spec.ts
+|
+|____ app.component.ts
+|
+|____ app.module.ts
+|
+|____ app-routing.module.ts
+
+
+
+如上图所示，项目源代码目录 `src/app` 下有个根模块 AppModule，同时该根模块还拥有两个子模块 ToolModule 工具模块和 WorkspaceModule 业务模块。其中 ToolModule 模块提供项目所需用到的自定义组件、动画、指令、管道等，同时需要注意的是将 ToolModule 的 `export` 属性将对应可声明对象（组件、指令、管道）声明出去，供项目业务模块 WorkspaceModule 使用。而 WorkspaceModule 业务模块主要根据业务功能添加页面组件等，其中业务模块中的登录模块，404模块的路由配置在根模块这一级别。在业务模块路由配置对应的业务功能组件路由。因此，业务模块路隶属于根模块路由。
 
 
 
@@ -24,7 +70,7 @@ npm run generate -- component tool/components/slidebar -m=tool --export
 
 ## Typscript 规范
 
-1. 缩进使用四格
+1. 缩进使用两个空格的形式
 2. 函数之间间隔一行
 
 
@@ -57,6 +103,10 @@ npm run generate -- component tool/components/slidebar -m=tool --export
 
 
 ### 组件命名
+
+组件文件夹命名以单个小写英文单词为主，例如 login、main、map 等。如果需要多个英文单词命名文件夹，则使用“-”连字，例如 not-found。
+
+而组件命名则使用大驼峰命名风格，例如 WorkspaceModule、ToolModule、LoadingAnimation、LoginComponent、NumberPipe 等
 
 
 
