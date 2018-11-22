@@ -6,46 +6,47 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## 项目目录说明
 
+```
 |-- app
-​    |-- app-routing.module.ts
-​    |-- app.component.html
-​    |-- app.component.scss
-​    |-- app.component.spec.ts
-​    |-- app.component.ts
-​    |-- app.module.ts
-​    |-- tool
-​    |   |-- tool.module.ts
-​    |   |-- animations
-​    |   |-- components
-​    |   |-- pipes
-​    |-- workspace
-​        |-- workspace-routing.module.ts
-​        |-- workspace.component.html
-​        |-- workspace.component.scss
-​        |-- workspace.component.spec.ts
-​        |-- workspace.component.ts
-​        |-- workspace.module.ts
-​        |-- login
-​        |   |-- login.component.html
-​        |   |-- login.component.scss
-​        |   |-- login.component.spec.ts
-​        |   |-- login.component.ts
-​        |-- main
-​        |   |-- main.component.html
-​        |   |-- main.component.scss
-​        |   |-- main.component.spec.ts
-​        |   |-- main.component.ts
-​        |-- map
-​        |   |-- map.component.html
-​        |   |-- map.component.scss
-​        |   |-- map.component.spec.ts
-​        |   |-- map.component.ts
-​        |-- not-found
-​            |-- not-found.component.html
-​            |-- not-found.component.scss
-​            |-- not-found.component.spec.ts
-​            |-- not-found.component.ts
-
+    |-- app-routing.module.ts
+    |-- app.component.html
+    |-- app.component.scss
+    |-- app.component.spec.ts
+    |-- app.component.ts
+    |-- app.module.ts
+    |-- tool
+    |   |-- tool.module.ts
+    |   |-- animations
+    |   |-- components
+    |   |-- pipes
+    |-- workspace
+        |-- workspace-routing.module.ts
+        |-- workspace.component.html
+        |-- workspace.component.scss
+        |-- workspace.component.spec.ts
+        |-- workspace.component.ts
+        |-- workspace.module.ts
+        |-- login
+        |   |-- login.component.html
+        |   |-- login.component.scss
+        |   |-- login.component.spec.ts
+        |   |-- login.component.ts
+        |-- main
+        |   |-- main.component.html
+        |   |-- main.component.scss
+        |   |-- main.component.spec.ts
+        |   |-- main.component.ts
+        |-- map
+        |   |-- map.component.html
+        |   |-- map.component.scss
+        |   |-- map.component.spec.ts
+        |   |-- map.component.ts
+        |-- not-found
+            |-- not-found.component.html
+            |-- not-found.component.scss
+            |-- not-found.component.spec.ts
+            |-- not-found.component.ts
+```
 
 
 
