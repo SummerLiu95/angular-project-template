@@ -14,9 +14,12 @@ import { IconDefinition } from '@ant-design/icons-angular';
 import * as AllIcons from '@ant-design/icons-angular/icons';
 import { registerLocaleData } from '@angular/common';
 import zh from '@angular/common/locales/zh';
+import { DelonMockModule } from '@delon/mock';
+import * as MOCK_DATA from './mock/index';
 
 // 模块内组件、指令、管道等导入
 import { AppComponent } from './app.component';
+import { environment } from '../environments/environment';
 
 registerLocaleData(zh);
 
@@ -25,6 +28,8 @@ const antDesignIcons = AllIcons as {
   [key: string]: IconDefinition;
 };
 const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesignIcons[key]);
+
+const MOCK_MODULE = !environment.production ? [ DelonMockModule.forRoot({ data: MOCK_DATA, log: true, delay: 700})] : [];
 
 @NgModule({
   declarations: [
@@ -38,7 +43,8 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
-    NgZorroAntdModule
+    NgZorroAntdModule,
+    ...MOCK_MODULE
   ],
   providers: [
     { provide: NZ_I18N, useValue: zh_CN },
