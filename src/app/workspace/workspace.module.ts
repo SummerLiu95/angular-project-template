@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 // 业务开发相关模块导入
 import { WorkspaceRoutingModule } from './workspace-routing.module';
+import { NgZorroAntdModule } from 'ng-zorro-antd';
 // 模块内组件、指令、管道等导入
 import { WorkspaceComponent } from './workspace.component';
 import { LoginComponent } from './login/login.component';
@@ -14,7 +15,8 @@ import { MapComponent } from './map/map.component';
   declarations: [WorkspaceComponent, LoginComponent, NotFoundComponent, MainComponent, MapComponent],
   imports: [
     CommonModule,
-    WorkspaceRoutingModule
+    WorkspaceRoutingModule,
+    NgZorroAntdModule
   ],
   exports: [LoginComponent, NotFoundComponent]
 })

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NzIconService } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-main',
@@ -7,7 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private iconService: NzIconService
+  ) {
+    this.iconService.fetchFromIconfont({
+      scriptUrl: 'https://at.alicdn.com/t/font_931245_uycqwbri2ef.js'
+    });
+  }
 
   ngOnInit() {
   }

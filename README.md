@@ -66,6 +66,10 @@ npm run generate -- component tool/components/slidebar -m=tool --export
 
 
 
+## Icon 资源使用
+
+项目中如有需要用到 icon 的地方，可以使用 Ng-Zorro 自带 icon 或者通过 Ng-Zorro 使用自定义的 iconfont 图标库中的图表。具体使用方法可以参见 [Icon 图标|NG-ZORRO](https://ng.ant.design/components/icon/zh#components-icon-demo-custom)
+
 
 
 ## Typscript 规范
