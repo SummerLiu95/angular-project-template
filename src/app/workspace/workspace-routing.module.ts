@@ -12,17 +12,17 @@ const routes: Routes = [
     component: WorkspaceComponent,
     children: [
       {
-        path: '',
-        redirectTo: '/workspace/main',
-        pathMatch: 'full'
-      },
-      {
         path: 'main',
         component: MainComponent
       },
       {
         path: 'map',
         component: MapComponent
+      },
+      {
+        path: '',
+        redirectTo: '/workspace/main',
+        pathMatch: 'full'
       }
     ]
   }
