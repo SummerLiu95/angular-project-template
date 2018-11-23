@@ -1,6 +1,23 @@
 <h1>
   <i nz-icon [iconfont]="'icon-IBM'"></i>
 </h1>
-<p>{{ mockResponse }}</p>
+<nz-table #basicTable [nzData]="mockResponse">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Age</th>
+    <th>Address</th>
+    <th>Email</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let item of basicTable.data">
+    <td>{{item.name}}</td>
+    <td>{{item.age}}</td>
+    <td>{{item.address}}</td>
+    <td>{{item.email}}</td>
+  </tr>
+  </tbody>
+</nz-table>
 
 

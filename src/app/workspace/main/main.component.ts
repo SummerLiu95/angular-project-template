@@ -22,7 +22,7 @@ export class MainComponent implements OnInit {
   ngOnInit() {
     this.http.get('players').subscribe(res => {
       console.log(res);
-      this.mockResponse = JSON.stringify(res);
+      this.mockResponse = res;
     });
   }
 
