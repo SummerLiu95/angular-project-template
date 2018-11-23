@@ -14,6 +14,9 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
     |-- app.component.spec.ts
     |-- app.component.ts
     |-- app.module.ts
+    |-- mock
+    |   |-- index.ts
+    |   |-- mock-data.ts
     |-- tool
     |   |-- tool.module.ts
     |   |-- animations
@@ -51,6 +54,8 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 
 如上图所示，项目源代码目录 `src/app` 下有个根模块 AppModule，同时该根模块还拥有两个子模块 ToolModule 工具模块和 WorkspaceModule 业务模块。其中 ToolModule 模块提供项目所需用到的自定义组件、动画、指令、管道等，同时需要注意的是将 ToolModule 的 `export` 属性将对应可声明对象（组件、指令、管道）声明出去，供项目业务模块 WorkspaceModule 使用。而 WorkspaceModule 业务模块主要根据业务功能添加页面组件等，其中业务模块中的登录模块，404模块的路由配置在根模块这一级别。在业务模块路由配置对应的业务功能组件路由。因此，业务模块路隶属于根模块路由。
+
+而 `app/mock` 目录下则为开发过程中 mock 数据接口的相关文件：`index.ts` 以及 `mock-data.ts`。其中 `index.ts` 中编写项目所使用的第三方库 @delon/mock 的 mock 数据的逻辑代码，而 `mock-data.ts` 中则使用第三方库 mockjs 去编写对应接口返回的数据。具体可查看代码进行理解。
 
 
 
