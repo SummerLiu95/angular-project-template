@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./main.component.scss']
 })
 export class MainComponent implements OnInit {
-  public mockResponse;
+  public playersList: [];
 
   constructor(
     private iconService: NzIconService,
@@ -22,7 +22,7 @@ export class MainComponent implements OnInit {
   ngOnInit() {
     this.http.get('players').subscribe(res => {
       console.log(res);
-      this.mockResponse = res;
+      this.playersList = res['data'];
     });
   }
 
