@@ -62,11 +62,14 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 ## 相关命令使用
 
 ```shell
-# 在特定端口运行本地服务
-npm start -- 6006
-
 # 使用 angular cli的 generate 命令生产组件、动画、指令......
 npm run generate -- component tool/components/slidebar -m=tool --export
+
+# 以生产环境配置文件进行本地运行
+npm start -- --configuration=production
+
+# 以预生产环境配置文件进行本地运行
+npm start -- --configuration=staging
 ```
 
 
@@ -75,7 +78,11 @@ npm run generate -- component tool/components/slidebar -m=tool --export
 
 项目中如有需要用到 icon 的地方，可以使用 Ng-Zorro 自带 icon 或者通过 Ng-Zorro 使用自定义的 iconfont 图标库中的图表。具体使用方法可以参见 [Icon 图标|NG-ZORRO](https://ng.ant.design/components/icon/zh#components-icon-demo-custom)
 
+## 环境配置文件
 
+`src/environments` 文件夹下的环境配置文件分别为本地开发环境 `environment.ts`、预生产环境 `environment.staging.ts`、生产环境 `environment.prod.ts`。其中我们一般将本地开发环境的baseURL字段设为空，预生产环境的baseURL字段设为后端接口部署的机子，生产环境的baseURL字段则为相对路径。
+
+例如在生产环境中，项目前后端同时部署于同一个服务器，此时的请求接口的地址全称为`http://<ip>:<port>/api/<接口路径>`。如果在预生产环境中，此时的请求接口的地址全称为`http://funhouse.barryliu1995.studio/api/<接口地址>`。如果是在本地开发环境中，此时的请求接口的地址全称为`<接口地址>`，此时是通过mock接口获取数据。
 
 ## Typscript 规范
 
@@ -86,7 +93,7 @@ npm run generate -- component tool/components/slidebar -m=tool --export
 
 ## SCSS规范
 
-
+默认使用 BEM 规范，具体可查阅 [CSS — BEM 命名规范](https://juejin.im/post/5b925e616fb9a05cdd2ce70d)
 
 ## HTML 规范
 在属性上，使用双引号，不要使用单引号；
@@ -116,8 +123,6 @@ npm run generate -- component tool/components/slidebar -m=tool --export
 组件文件夹命名以单个小写英文单词为主，例如 login、main、map 等。如果需要多个英文单词命名文件夹，则使用“-”连字，例如 not-found。
 
 而组件命名则使用大驼峰命名风格，例如 WorkspaceModule、ToolModule、LoadingAnimation、LoginComponent、NumberPipe 等
-
-
 
 
 ### 变量命名

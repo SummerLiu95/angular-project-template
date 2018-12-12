@@ -82,7 +82,7 @@
               "browserTarget": "front-end-project-standard-demo:build:production"
             },
             "staging": {
-              "browserTarget": "your-project-name:build:staging"
+              "browserTarget": "front-end-project-standard-demo:build:staging"
             }
           }
         },
