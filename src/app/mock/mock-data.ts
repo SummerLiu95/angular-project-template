@@ -1,5 +1,4 @@
 import * as Mock from 'mockjs';
-import { Random } from 'mockjs';
 
 export const players = Mock.mock({
   'errorCode': '@integer(0,5)',
