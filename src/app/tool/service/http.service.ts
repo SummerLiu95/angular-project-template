@@ -25,6 +25,10 @@ export class HttpService {
     private httpClient: HttpClient
   ) { }
 
+  /**
+   * 网络请求异常处理函数
+   * @param error| HttpErrorResponse
+   */
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.
@@ -41,6 +45,26 @@ export class HttpService {
       'Something bad happened; please try again later.');
   }
 
+  /**
+   * Post 请求参数处理函数
+   * @param _params|any
+   */
+  private toFormData(_params: any): FormData {
+    if (!_params) {
+      return new FormData();
+    }
+    if (_params.constructor === FormData) {
+      return _params;
+    }
+    const formData = new FormData();
+    for (const key in _params) {
+      if (_params.hasOwnProperty(key)) {
+        formData.append(key, _params[key]);
+      }
+    }
+    return formData;
+  }
+
   Get(_url: string, _params: ParamsType = {}): Observable<any> {
     const URL = environment.baseURL + _url;
     const params = new HttpParams({
@@ -49,6 +73,22 @@ export class HttpService {
     return this.httpClient.get<HttpResponse>(URL, {
       params
     }).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  Post(_url: string, _params: any): Observable<any> {
+    const URL = environment.baseURL + _url;
+    return this.httpClient.post(URL, this.toFormData(_params), {
+
+    }).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  Put(_url: string, _params: any): Observable<any> {
+    const URL = environment.baseURL + _url;
+    return this.httpClient.put(URL, _params).pipe(
       catchError(this.handleError)
     );
   }
