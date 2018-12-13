@@ -6,6 +6,7 @@
     "start": "ng serve --open --port 6006",
     "build": "ng build --configuration=production",
     "staging": "ng build --configuration=staging",
+    "dev": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

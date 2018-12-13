@@ -29,7 +29,7 @@ const antDesignIcons = AllIcons as {
 };
 const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesignIcons[key]);
 
-const MOCK_MODULE = !environment.production ? [ DelonMockModule.forRoot({ data: MOCK_DATA, log: true, delay: 700})] : [];
+const MOCK_MODULE = environment.envName === 'dev' ? [ DelonMockModule.forRoot({ data: MOCK_DATA, log: true, delay: 700})] : [];
 
 @NgModule({
   declarations: [

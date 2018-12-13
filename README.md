@@ -7,48 +7,77 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 ## 项目目录说明
 
 ```
-|-- app
-    |-- app-routing.module.ts
-    |-- app.component.html
-    |-- app.component.scss
-    |-- app.component.spec.ts
-    |-- app.component.ts
-    |-- app.module.ts
-    |-- mock
-    |   |-- index.ts
-    |   |-- mock-data.ts
-    |-- tool
-    |   |-- tool.module.ts
-    |   |-- animations
-    |   |-- components
-    |   |-- pipes
-    |-- workspace
-        |-- workspace-routing.module.ts
-        |-- workspace.component.html
-        |-- workspace.component.scss
-        |-- workspace.component.spec.ts
-        |-- workspace.component.ts
-        |-- workspace.module.ts
-        |-- login
-        |   |-- login.component.html
-        |   |-- login.component.scss
-        |   |-- login.component.spec.ts
-        |   |-- login.component.ts
-        |-- main
-        |   |-- main.component.html
-        |   |-- main.component.scss
-        |   |-- main.component.spec.ts
-        |   |-- main.component.ts
-        |-- map
-        |   |-- map.component.html
-        |   |-- map.component.scss
-        |   |-- map.component.spec.ts
-        |   |-- map.component.ts
-        |-- not-found
-            |-- not-found.component.html
-            |-- not-found.component.scss
-            |-- not-found.component.spec.ts
-            |-- not-found.component.ts
+|-- src
+​    |-- browserslist
+​    |-- favicon.ico
+​    |-- index.html
+​    |-- karma.conf.js
+​    |-- main.ts
+​    |-- polyfills.ts
+​    |-- styles.scss
+​    |-- test.ts
+​    |-- tsconfig.app.json
+​    |-- tsconfig.spec.json
+​    |-- tslint.json
+​    |-- app
+​    |   |-- app-routing.module.ts
+​    |   |-- app.component.html
+​    |   |-- app.component.scss
+​    |   |-- app.component.spec.ts
+​    |   |-- app.component.ts
+​    |   |-- app.module.ts
+​    |   |-- mock
+​    |   |   |-- index.ts
+​    |   |   |-- mock-data.ts
+​    |   |-- tool
+​    |   |   |-- api.ts
+​    |   |   |-- tool.module.ts
+​    |   |   |-- animations
+​    |   |   |   |-- .gitkeep
+​    |   |   |-- components
+​    |   |   |   |-- .gitkeep
+​    |   |   |-- pipes
+​    |   |   |   |-- .gitkeep
+​    |   |   |-- service
+​    |   |   |   |-- http.service.ts
+​    |   |   |-- type
+​    |   |       |-- types.ts
+​    |   |-- workspace
+​    |       |-- data.service.ts
+​    |       |-- workspace-routing.module.ts
+​    |       |-- workspace.component.html
+​    |       |-- workspace.component.scss
+​    |       |-- workspace.component.spec.ts
+​    |       |-- workspace.component.ts
+​    |       |-- workspace.module.ts
+​    |       |-- login
+​    |       |   |-- login.component.html
+​    |       |   |-- login.component.scss
+​    |       |   |-- login.component.spec.ts
+​    |       |   |-- login.component.ts
+​    |       |-- main
+​    |       |   |-- main.component.html
+​    |       |   |-- main.component.scss
+​    |       |   |-- main.component.spec.ts
+​    |       |   |-- main.component.ts
+​    |       |-- map
+​    |       |   |-- map.component.html
+​    |       |   |-- map.component.scss
+​    |       |   |-- map.component.spec.ts
+​    |       |   |-- map.component.ts
+​    |       |-- not-found
+​    |           |-- not-found.component.html
+​    |           |-- not-found.component.scss
+​    |           |-- not-found.component.spec.ts
+​    |           |-- not-found.component.ts
+​    |-- assets
+​    |   |-- .gitkeep
+​    |   |-- images
+​    |       |-- .gitkeep
+​    |-- environments
+​        |-- environment.prod.ts
+​        |-- environment.staging.ts
+​        |-- environment.ts
 ```
 
 
@@ -70,6 +99,15 @@ npm start -- --configuration=production
 
 # 以预生产环境配置文件进行本地运行
 npm start -- --configuration=staging
+
+# 打包生产环境代码
+npm run build
+
+# 打包预生产环境代码
+npm run staging
+
+# 打包开发环境代码
+npm run dev
 ```
 
 
@@ -83,6 +121,8 @@ npm start -- --configuration=staging
 `src/environments` 文件夹下的环境配置文件分别为本地开发环境 `environment.ts`、预生产环境 `environment.staging.ts`、生产环境 `environment.prod.ts`。其中我们一般将本地开发环境的baseURL字段设为空，预生产环境的baseURL字段设为后端接口部署的机子，生产环境的baseURL字段则为相对路径。
 
 例如在生产环境中，项目前后端同时部署于同一个服务器，此时的请求接口的地址全称为`http://<ip>:<port>/api/<接口路径>`。如果在预生产环境中，此时的请求接口的地址全称为`http://funhouse.barryliu1995.studio/api/<接口地址>`。如果是在本地开发环境中，此时的请求接口的地址全称为`<接口地址>`，此时是通过mock接口获取数据。
+
+目前多环境配置的预设场景为：本地开发环境使用 mock 接口，测试环境使用另外一台机子的测试接口，正式环境使用相对路径（预设为生产环境下，后端和前端代码部署到同一台机子上）
 
 ## Typscript 规范
 
