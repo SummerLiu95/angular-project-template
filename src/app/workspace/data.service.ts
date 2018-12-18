@@ -15,7 +15,7 @@ export class DataService {
   ) { }
 
   getPlayer() {
-    this.http.Get(`${API.players}`).subscribe((res: HttpResponse) => {
+    this.http.Get(`${API.players}`).subscribe((res: HttpResponse<PlayersListType[]>) => {
       console.log(res);
       this.$playersList.next(res.data);
     });

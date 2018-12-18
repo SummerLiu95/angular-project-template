@@ -5,10 +5,10 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 // http 响应体类型
-export interface HttpResponse {
+export interface HttpResponse<T = any> {
   errorCode: number;
   errorMsg: string;
-  data: any;
+  data: T;
 }
 
 // 参数类型声明
