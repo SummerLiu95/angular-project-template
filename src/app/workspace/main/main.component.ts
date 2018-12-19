@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NzIconService } from 'ng-zorro-antd';
 
 import { environment } from '../../../environments/environment';
-import {DataService} from '../data.service';
-import {PlayersListType} from '../../tool/type/types';
+import { DataService } from '../data.service';
+import { PlayersListItemType } from '../../tool/type/types';
 
 @Component({
   selector: 'app-main',
@@ -11,7 +11,7 @@ import {PlayersListType} from '../../tool/type/types';
   styleUrls: ['./main.component.scss']
 })
 export class MainComponent implements OnInit {
-  public playersList: Array<PlayersListType>;
+  public playersList: Array<PlayersListItemType>;
 
   constructor(
     private iconService: NzIconService,
@@ -20,14 +20,14 @@ export class MainComponent implements OnInit {
     this.iconService.fetchFromIconfont({
       scriptUrl: 'https://at.alicdn.com/t/font_931245_uycqwbri2ef.js'
     });
-    console.log(environment.envName);
+    console.log(`environment.envName: ${environment.envName}`);
   }
 
   ngOnInit() {
-    console.log(environment.baseURL);
+    console.log(`environment.baseURL: ${environment.baseURL}`);
     this.dataService.getPlayer();
     this.dataService.$playersList.subscribe(data => {
-      this.playersList = data;
+      this.playersList = data.list;
     });
   }
 

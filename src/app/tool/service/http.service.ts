@@ -6,8 +6,8 @@ import { catchError } from 'rxjs/operators';
 
 // http 响应体类型
 export interface HttpResponse<T = any> {
-  errorCode: number;
-  errorMsg: string;
+  code: number;
+  msg: string;
   data: T;
 }
 
