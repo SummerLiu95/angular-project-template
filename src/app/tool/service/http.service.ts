@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import {catchError, map} from 'rxjs/operators';
+import {NzMessageService} from 'ng-zorro-antd';
 
 // http 响应体类型
 export interface HttpResponse<T = any> {
@@ -11,9 +12,22 @@ export interface HttpResponse<T = any> {
   data: T;
 }
 
+export enum StateCode {
+  error =  400,
+  ok = 200,
+  timeout = 408,
+  serviceError = 500
+}
+
+export enum ContentType {
+  default = 0,
+  JSON = 1,
+  FormData = 2
+}
+
 // 参数类型声明
 interface ParamsType  {
-  [propName: string]: string | string [];
+  [propName: string]: any;
 }
 
 @Injectable({
@@ -22,6 +36,7 @@ interface ParamsType  {
 export class HttpService {
 
   constructor(
+    private message: NzMessageService,
     private httpClient: HttpClient
   ) { }
 
@@ -77,18 +92,74 @@ export class HttpService {
     );
   }
 
-  Post(_url: string, _params: any): Observable<any> {
+  Post(_url: string, _params: ParamsType, contentType: ContentType): Observable<any> {
+    const jsonHeaders = new HttpHeaders({
+      'Content-Type':  'application/json'
+    });
+    const formDataHeaders = new HttpHeaders({
+      'Content-Type':  'multipart/form-data'
+    });
+    let headers = {};
     const URL = environment.baseURL + _url;
-    return this.httpClient.post(URL, this.toFormData(_params), {
-
+    if (contentType === 1) {
+      headers = jsonHeaders;
+    } else if (contentType === 2) {
+      headers = formDataHeaders;
+    }
+    const messageID = this.message.loading('添加中...', { nzDuration: 0 }).messageId;
+    return this.httpClient.post(URL, _params, {
+      headers
     }).pipe(
+      map((res: HttpResponse) => {
+        this.message.remove(messageID);
+        if (res.code === StateCode.ok) {
+          this.message.success(res.msg);
+          return res;
+        } else {
+          this.message.error(res.msg);
+        }
+      }),
       catchError(this.handleError)
     );
   }
 
-  Put(_url: string, _params: any): Observable<any> {
+  Put(_url: string, _params: ParamsType): Observable<any> {
     const URL = environment.baseURL + _url;
-    return this.httpClient.put(URL, _params).pipe(
+    const messageID = this.message.loading('更新中...', { nzDuration: 0 }).messageId;
+    return this.httpClient.put(URL, _params, {
+
+    }).pipe(
+      map((res: HttpResponse) => {
+        this.message.remove(messageID);
+        if (res.code === StateCode.ok) {
+          this.message.success(res.msg);
+          return res;
+        } else {
+          this.message.error(res.msg);
+        }
+      }),
+      catchError(this.handleError)
+    );
+  }
+
+  Delete(_url: string, _params: ParamsType): Observable<any> {
+    const URL = environment.baseURL + _url;
+    const params = new HttpParams({
+      fromObject: _params
+    });
+    const messageID = this.message.loading('删除中...', { nzDuration: 0 }).messageId;
+    return this.httpClient.put(URL, _params, {
+      params
+    }).pipe(
+      map((res: HttpResponse) => {
+        this.message.remove(messageID);
+        if (res.code === StateCode.ok) {
+          this.message.success(res.msg);
+          return res;
+        } else {
+          this.message.error(res.msg);
+        }
+      }),
       catchError(this.handleError)
     );
   }
