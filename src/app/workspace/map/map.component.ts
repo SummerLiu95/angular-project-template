@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ContentType, HttpService} from '../../tool/service/http.service';
+import {PostContentType, HttpService} from '../../tool/service/http.service';
 
 @Component({
   selector: 'app-map',
@@ -24,13 +24,13 @@ export class MapComponent implements OnInit {
     };
     switch (contentType) {
       case 0:
-        this.http.Post('test/update', params, ContentType.default).subscribe();
+        this.http.Post('test/update', params, PostContentType.default).subscribe();
         break;
       case 1:
-        this.http.Post('test/update', params, ContentType.JSON).subscribe();
+        this.http.Post('test/update', params, PostContentType.JSON).subscribe();
         break;
       case 2:
-        this.http.Post('test/update', params, ContentType.FormData).subscribe();
+        this.http.Post('test/update', params, PostContentType.FormData).subscribe();
         break;
     }
   }

@@ -19,7 +19,7 @@ export enum StateCode {
   serviceError = 500
 }
 
-export enum ContentType {
+export enum PostContentType {
   default = 0,
   JSON = 1,
   FormData = 2
@@ -61,7 +61,7 @@ export class HttpService {
   }
 
   /**
-   * Post 请求参数处理函数
+   * Post 请求参数处理成 FormData 函数
    * @param _params|any
    */
   private toFormData(_params: any): FormData {
@@ -80,6 +80,11 @@ export class HttpService {
     return formData;
   }
 
+  /**
+   * GET 请求
+   * @param _url|string API接口地址
+   * @param _params|ParamsType 参数对象
+   */
   Get(_url: string, _params: ParamsType = {}): Observable<any> {
     const URL = environment.baseURL + _url;
     const params = new HttpParams({
@@ -92,24 +97,37 @@ export class HttpService {
     );
   }
 
-  Post(_url: string, _params: ParamsType, contentType: ContentType): Observable<any> {
-    const jsonHeaders = new HttpHeaders({
-      'Content-Type':  'application/json'
-    });
-    const formDataHeaders = new HttpHeaders({
-      'Content-Type':  'multipart/form-data'
-    });
-    let headers = {};
+  /**
+   * 请求主体可以为 urlencoding、JSON、FormData 的 POST 请求
+   * @param _url|string API接口地址 
+   * @param _params|ParamsType 参数对象 
+   * @param contentType|ContentType Post请求body编码格式 
+   */
+  Post(_url: string, _params: ParamsType, contentType: PostContentType): Observable<any> {
+    let httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json;charset=UTF-8'
+      })
+    };
+    let params;
     const URL = environment.baseURL + _url;
-    if (contentType === 1) {
-      headers = jsonHeaders;
-    } else if (contentType === 2) {
-      headers = formDataHeaders;
+    switch (contentType) {
+      case 0:
+        params = new HttpParams({
+          fromObject: _params
+        });
+        httpOptions.headers = httpOptions.headers.set('Content-Type', 'application/x-www-form-urlencoded;charset=UTF-8');
+        break;
+      case 1:
+        params = _params;
+        break;
+      case 2:
+        params = this.toFormData(_params);
+        httpOptions.headers = httpOptions.headers.set('Content-Type', 'multipart/form-data');
+        break;
     }
     const messageID = this.message.loading('添加中...', { nzDuration: 0 }).messageId;
-    return this.httpClient.post(URL, _params, {
-      headers
-    }).pipe(
+    return this.httpClient.post(URL, params, httpOptions).pipe(
       map((res: HttpResponse) => {
         this.message.remove(messageID);
         if (res.code === StateCode.ok) {
@@ -123,6 +141,11 @@ export class HttpService {
     );
   }
 
+  /**
+   * 请求主体为 JSON 的 PUT 请求
+   * @param _url|string API接口地址
+   * @param _params|ParamsType 参数对象
+   */
   Put(_url: string, _params: ParamsType): Observable<any> {
     const URL = environment.baseURL + _url;
     const messageID = this.message.loading('更新中...', { nzDuration: 0 }).messageId;
@@ -142,13 +165,18 @@ export class HttpService {
     );
   }
 
+  /**
+   * DELETE 请求
+   * @param _url|string API接口地址 
+   * @param _params|ParamsType 参数对象 
+   */
   Delete(_url: string, _params: ParamsType): Observable<any> {
     const URL = environment.baseURL + _url;
     const params = new HttpParams({
       fromObject: _params
     });
     const messageID = this.message.loading('删除中...', { nzDuration: 0 }).messageId;
-    return this.httpClient.put(URL, _params, {
+    return this.httpClient.put(URL, {
       params
     }).pipe(
       map((res: HttpResponse) => {
