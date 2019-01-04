@@ -104,11 +104,6 @@ export class HttpService {
    * @param contentType|ContentType Post请求body编码格式 
    */
   Post(_url: string, _params: ParamsType, contentType: PostContentType): Observable<any> {
-    let httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type':  'application/json;charset=UTF-8'
-      })
-    };
     let params;
     const URL = environment.baseURL + _url;
     switch (contentType) {
@@ -116,18 +111,18 @@ export class HttpService {
         params = new HttpParams({
           fromObject: _params
         });
-        httpOptions.headers = httpOptions.headers.set('Content-Type', 'application/x-www-form-urlencoded;charset=UTF-8');
         break;
       case 1:
         params = _params;
         break;
       case 2:
         params = this.toFormData(_params);
-        httpOptions.headers = httpOptions.headers.set('Content-Type', 'multipart/form-data');
         break;
     }
     const messageID = this.message.loading('添加中...', { nzDuration: 0 }).messageId;
-    return this.httpClient.post(URL, params, httpOptions).pipe(
+    return this.httpClient.post(URL, params, {
+      
+    }).pipe(
       map((res: HttpResponse) => {
         this.message.remove(messageID);
         if (res.code === StateCode.ok) {
