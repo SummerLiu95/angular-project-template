@@ -5,7 +5,7 @@ export interface PlayersListItemType {
   email: string;
 }
 
-export interface PlayersListResponseType<T = any> {
+export interface TableListResponseType<T = any> {
   total: number;
   list: Array<T>;
   pageNum: number;

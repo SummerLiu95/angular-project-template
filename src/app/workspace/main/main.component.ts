@@ -25,9 +25,8 @@ export class MainComponent implements OnInit {
 
   ngOnInit() {
     console.log(`environment.baseURL: ${environment.baseURL}`);
-    this.dataService.getPlayer();
-    this.dataService.$playersList.subscribe(data => {
-      this.playersList = data.list;
+    this.dataService.getPlayer(1).subscribe(res => {
+      this.playersList = res.data.list;
     });
   }
 

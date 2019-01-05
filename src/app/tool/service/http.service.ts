@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { Observable, throwError } from 'rxjs';
-import {catchError, map} from 'rxjs/operators';
-import {NzMessageService} from 'ng-zorro-antd';
+import { Observable } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
+import { NzMessageService } from 'ng-zorro-antd';
+import { HandleError, HttpErrorHandlerService } from './http-error-handler.service';
 
 // http 响应体类型
-export interface HttpResponse<T = any> {
+export interface HttpResponseType<T = any> {
   code: number;
   msg: string;
   data: T;
@@ -34,31 +35,16 @@ interface ParamsType  {
   providedIn: 'root'
 })
 export class HttpService {
+  private handleError: HandleError;
 
   constructor(
     private message: NzMessageService,
-    private httpClient: HttpClient
-  ) { }
-
-  /**
-   * 网络请求异常处理函数
-   * @param error| HttpErrorResponse
-   */
-  private handleError(error: HttpErrorResponse) {
-    if (error.error instanceof ErrorEvent) {
-      // A client-side or network error occurred. Handle it accordingly.
-      console.error('An error occurred:', error.error.message);
-    } else {
-      // The backend returned an unsuccessful response code.
-      // The response body may contain clues as to what went wrong,
-      console.error(
-        `Backend returned code ${error.status}, ` +
-        `body was: ${error.error}`);
-    }
-    // return an observable with a user-facing error message
-    return throwError(
-      'Something bad happened; please try again later.');
+    private httpClient: HttpClient,
+    httpErrorHandler: HttpErrorHandlerService
+  ) {
+    this.handleError = httpErrorHandler.createErrorHandler('数据获取服务类');
   }
+
 
   /**
    * Post 请求参数处理成 FormData 函数
@@ -85,15 +71,15 @@ export class HttpService {
    * @param _url|string API接口地址
    * @param _params|ParamsType 参数对象
    */
-  Get(_url: string, _params: ParamsType = {}): Observable<any> {
+  Get(_url: string, _params: ParamsType = {}, feeback: string = 'operation', safeResult: any): Observable<HttpResponseType> {
     const URL = environment.baseURL + _url;
     const params = new HttpParams({
       fromObject: _params
     });
-    return this.httpClient.get<HttpResponse>(URL, {
+    return this.httpClient.get<HttpResponseType>(URL, {
       params
     }).pipe(
-      catchError(this.handleError)
+      catchError(this.handleError('', feeback, safeResult))
     );
   }
 
@@ -103,7 +89,7 @@ export class HttpService {
    * @param _params|ParamsType 参数对象 
    * @param contentType|ContentType Post请求body编码格式 
    */
-  Post(_url: string, _params: ParamsType, contentType: PostContentType): Observable<any> {
+  Post(_url: string, _params: ParamsType, contentType: PostContentType, feeback: string = 'operation', safeResult: any): Observable<HttpResponseType> {
     let params;
     const URL = environment.baseURL + _url;
     switch (contentType) {
@@ -123,16 +109,10 @@ export class HttpService {
     return this.httpClient.post(URL, params, {
       
     }).pipe(
-      map((res: HttpResponse) => {
-        this.message.remove(messageID);
-        if (res.code === StateCode.ok) {
-          this.message.success(res.msg);
-          return res;
-        } else {
-          this.message.error(res.msg);
-        }
-      }),
-      catchError(this.handleError)
+      map((response: HttpResponseType) => {
+        return this.responseHandler(response, messageID);
+        }),
+      catchError(this.handleError(messageID, feeback, safeResult))
     );
   }
 
@@ -141,22 +121,16 @@ export class HttpService {
    * @param _url|string API接口地址
    * @param _params|ParamsType 参数对象
    */
-  Put(_url: string, _params: ParamsType): Observable<any> {
+  Put(_url: string, _params: ParamsType, feeback: string = 'operation', safeResult: any): Observable<HttpResponseType> {
     const URL = environment.baseURL + _url;
     const messageID = this.message.loading('更新中...', { nzDuration: 0 }).messageId;
     return this.httpClient.put(URL, _params, {
 
     }).pipe(
-      map((res: HttpResponse) => {
-        this.message.remove(messageID);
-        if (res.code === StateCode.ok) {
-          this.message.success(res.msg);
-          return res;
-        } else {
-          this.message.error(res.msg);
-        }
-      }),
-      catchError(this.handleError)
+      map((response: HttpResponseType) => {
+        return this.responseHandler(response, messageID);
+        }),
+      catchError(this.handleError(messageID, feeback, safeResult))
     );
   }
 
@@ -165,7 +139,7 @@ export class HttpService {
    * @param _url|string API接口地址 
    * @param _params|ParamsType 参数对象 
    */
-  Delete(_url: string, _params: ParamsType): Observable<any> {
+  Delete(_url: string, _params: ParamsType, feeback: string = 'operation', safeResult: any): Observable<HttpResponseType> {
     const URL = environment.baseURL + _url;
     const params = new HttpParams({
       fromObject: _params
@@ -174,16 +148,27 @@ export class HttpService {
     return this.httpClient.put(URL, {
       params
     }).pipe(
-      map((res: HttpResponse) => {
-        this.message.remove(messageID);
-        if (res.code === StateCode.ok) {
-          this.message.success(res.msg);
-          return res;
-        } else {
-          this.message.error(res.msg);
-        }
-      }),
-      catchError(this.handleError)
+      map((response: HttpResponseType) => {
+        return this.responseHandler(response, messageID);
+        }),
+      catchError(this.handleError(messageID, feeback, safeResult))
     );
+  }
+
+  /**
+   * 请求成功情况处理
+   * @param response|HttpResponseType
+   * @param messageID|string
+   */
+  private responseHandler(response: HttpResponseType, messageID: string): HttpResponseType {
+    this.message.remove(messageID);
+    if (response.code === StateCode.ok) {
+      // 请求成功
+      this.message.success(response.msg);
+    } else {
+      // 请求异常以外的非成功状态码，如状态码 3XX
+      this.message.warning(response.msg);
+    }
+    return response;
   }
 }
