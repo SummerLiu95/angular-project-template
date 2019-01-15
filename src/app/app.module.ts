@@ -39,11 +39,11 @@ const MOCK_MODULE = environment.envName === 'dev' ? [ DelonMockModule.forRoot({ 
     BrowserModule,
     ToolModule,
     WorkspaceModule,
-    AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
     NgZorroAntdModule,
+    AppRoutingModule,
     ...MOCK_MODULE
   ],
   providers: [

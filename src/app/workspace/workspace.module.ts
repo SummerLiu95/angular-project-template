@@ -1,6 +1,7 @@
 // Angular 核心模块导入
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 // 业务开发相关模块导入
 import { WorkspaceRoutingModule } from './workspace-routing.module';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
@@ -16,7 +17,8 @@ import { MapComponent } from './map/map.component';
   imports: [
     CommonModule,
     WorkspaceRoutingModule,
-    NgZorroAntdModule
+    NgZorroAntdModule,
+    FormsModule
   ],
   exports: [LoginComponent, NotFoundComponent]
 })

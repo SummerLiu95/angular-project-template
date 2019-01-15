@@ -2,8 +2,6 @@
   <i nz-icon [iconfont]="'icon-Youtube'"></i>
 </p>
 
-
-
 <ul>
   <li><button nz-button nzType="primary" (click)="addSomething(1)">Post with JSON</button></li>
   <li><button nz-button nzType="primary" (click)="addSomething(2)">Post with FormData</button></li>
@@ -12,3 +10,7 @@
   <li><button nz-button nzType="primary" (click)="deleteSomething()">DELETE</button></li>
   <li><button nz-button nzType="primary" (click)="updateSomething()">PUT</button></li>
 </ul>
+
+
+<textarea rows="4" nz-input [(ngModel)]="inputValue"></textarea>
+<button nz-button nzType="primary" (click)="back()">返回</button>

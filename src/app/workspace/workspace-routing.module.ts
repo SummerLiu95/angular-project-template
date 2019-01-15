@@ -5,6 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { MainComponent } from './main/main.component';
 import { WorkspaceComponent } from './workspace.component';
 import { MapComponent } from './map/map.component';
+import { CanDeactivateGuard } from '../tool/can-deactivate.guard';
 
 const routes: Routes = [
   {
@@ -17,7 +18,8 @@ const routes: Routes = [
       },
       {
         path: 'map',
-        component: MapComponent
+        component: MapComponent,
+        canDeactivate: [CanDeactivateGuard]
       },
       {
         path: '',
