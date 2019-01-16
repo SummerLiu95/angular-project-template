@@ -1,15 +1,13 @@
 import * as Mock from 'mockjs';
 
-export const players = Mock.mock({
+export const heroes = Mock.mock({
   'code': '@integer(0,5)',
   'msg': '@sentence(0, 9)',
   'data': {
     'total': 40,
     'list|10': [{
       'name': '@first @last',
-      'age': '@integer(0, 100)',
-      'address': '@county(true)',
-      'email': '@EMAIL'
+      'id': '@integer(0, 100)'
     }],
     'pageNum': 1,
     'pageSize': 10

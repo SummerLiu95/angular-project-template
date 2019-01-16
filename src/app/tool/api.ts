@@ -1,3 +1,3 @@
 export const API = {
-  players: 'players'
+  heroes: 'heroes'
 };

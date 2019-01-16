@@ -9,7 +9,6 @@ import { Router } from '@angular/router';
 // 业务开发模块导入
 import { AppRoutingModule } from './app-routing.module';
 import { ToolModule } from './tool/tool.module';
-import { WorkspaceModule } from './workspace/workspace.module';
 import { NgZorroAntdModule, NZ_I18N, zh_CN, NZ_ICONS } from 'ng-zorro-antd';
 import { IconDefinition } from '@ant-design/icons-angular';
 import * as AllIcons from '@ant-design/icons-angular/icons';
@@ -21,6 +20,8 @@ import * as MOCK_DATA from './mock/index';
 // 模块内组件、指令、管道等导入
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
+import { HeroesModule } from './workspace/heroes/heroes.module';
+import { NotFoundComponent } from './workspace/not-found/not-found.component';
 
 registerLocaleData(zh);
 
@@ -34,16 +35,17 @@ const MOCK_MODULE = environment.envName === 'dev' ? [ DelonMockModule.forRoot({ 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
     ToolModule,
-    WorkspaceModule,
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
     NgZorroAntdModule,
+    HeroesModule,
     AppRoutingModule,
     ...MOCK_MODULE
   ],
