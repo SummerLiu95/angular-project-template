@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Hero } from '../../../tool/type/heroes';
 import { DataService } from '../../../tool/service/data.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { HttpResponseType } from '../../../tool/service/http.service';
 import { TableListResponseType } from '../../../tool/type/types';
@@ -23,7 +23,7 @@ export class HeroListComponent implements OnInit {
 
   ngOnInit() {
     this.heroes$ = this.route.paramMap.pipe(
-      switchMap(params => {
+      switchMap((params: ParamMap) => {
         // (+) before `params.get()` turns the string into a number
         this.selectedId = +params.get('id');
         return this.dataService.getHeroes();
