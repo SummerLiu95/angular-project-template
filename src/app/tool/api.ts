@@ -1,3 +1,4 @@
 export const API = {
-  heroes: 'heroes'
+  heroes: 'heroes',
+  crises: 'crises'
 };

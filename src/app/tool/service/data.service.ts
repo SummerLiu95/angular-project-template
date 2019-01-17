@@ -6,6 +6,7 @@ import { TableListResponseType } from '../type/types';
 import { HandleError, HttpErrorHandlerService } from './http-error-handler.service';
 import { map } from 'rxjs/operators';
 import { Hero } from '../type/heroes';
+import { Crisis } from '../type/crisis-center';
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +33,19 @@ export class DataService {
   getHero(id: string): Observable<Hero> {
     return this.getHeroes().pipe(
       map(heroes => heroes.find(hero => hero.id === +id))
+    );
+  }
+
+  getCrises(): Observable<any> {
+    return this.http.Get(API.crises, {}, '请求危机列表数据', {data: { list: []}})
+      .pipe(map((res: HttpResponseType<TableListResponseType>) => {
+        return res.data.list;
+      }));
+  }
+
+  getCrisis(id: string): Observable<Crisis> {
+    return this.getCrises().pipe(
+      map(crises => crises.find(crisis => crisis.id === +id))
     );
   }
 }
