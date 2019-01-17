@@ -8,7 +8,7 @@ import { mergeMap, take } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class CrisisDetailResolverService implements Resolve<Crisis>{
+export class CrisisDetailResolverService implements Resolve<Crisis> {
 
   constructor(
     private dataService: DataService,
