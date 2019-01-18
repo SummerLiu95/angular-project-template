@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --open --port 6006",
+    "start": "ng serve --open --port",
     "build": "ng build --configuration=production --outputHashing=all",
     "staging": "ng build --configuration=staging --outputHashing=all",
     "dev": "ng build --outputHashing=all",
