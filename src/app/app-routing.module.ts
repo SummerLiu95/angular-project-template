@@ -11,6 +11,10 @@ const routes: Routes = [
     outlet: 'popup'
   },
   {
+    path: 'admin',
+    loadChildren: './workspace/admin/admin.module#AdminModule'
+  },
+  {
     path: '',
     redirectTo: '/heroes',
     pathMatch: 'full'

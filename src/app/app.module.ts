@@ -24,7 +24,6 @@ import { HeroesModule } from './workspace/heroes/heroes.module';
 import { NotFoundComponent } from './workspace/not-found/not-found.component';
 import { CrisisCenterModule } from './workspace/crisis-center/crisis-center.module';
 import { ComposeMessageComponent } from './workspace/compose-message/compose-message.component';
-import { AdminModule } from './workspace/admin/admin.module';
 import { AuthModule } from './workspace/auth/auth.module';
 
 registerLocaleData(zh);
@@ -52,7 +51,6 @@ const MOCK_MODULE = environment.envName === 'dev' ? [ DelonMockModule.forRoot({ 
     NgZorroAntdModule,
     HeroesModule,
     CrisisCenterModule,
-    AdminModule,
     AuthModule,
     AppRoutingModule,
     ...MOCK_MODULE
