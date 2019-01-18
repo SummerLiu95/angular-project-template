@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { NotFoundComponent } from './workspace/not-found/not-found.component';
 import { ComposeMessageComponent } from './workspace/compose-message/compose-message.component';
 import { AuthGuard } from './workspace/auth/auth.guard';
+import { SelectivePreloadingStrategyService } from './tool/service/selective-preloading-strategy.service';
 
 const routes: Routes = [
   {
@@ -17,6 +18,13 @@ const routes: Routes = [
     canLoad: [AuthGuard]
   },
   {
+    path: 'crisis-center',
+    loadChildren: './workspace/crisis-center/crisis-center.module#CrisisCenterModule',
+    data: {
+      preload: true
+    }
+  },
+  {
     path: '',
     redirectTo: '/heroes',
     pathMatch: 'full'
@@ -28,7 +36,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { preloadingStrategy: SelectivePreloadingStrategyService })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
