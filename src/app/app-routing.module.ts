@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { NotFoundComponent } from './workspace/not-found/not-found.component';
 import { ComposeMessageComponent } from './workspace/compose-message/compose-message.component';
+import { AuthGuard } from './workspace/auth/auth.guard';
 
 const routes: Routes = [
   {
@@ -12,7 +13,8 @@ const routes: Routes = [
   },
   {
     path: 'admin',
-    loadChildren: './workspace/admin/admin.module#AdminModule'
+    loadChildren: './workspace/admin/admin.module#AdminModule',
+    canLoad: [AuthGuard]
   },
   {
     path: '',
