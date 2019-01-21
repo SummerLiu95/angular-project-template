@@ -6,6 +6,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## 项目目录说明
 
+```
 |-- src
     |-- app-routing.module.ts
     |-- app.component.html
@@ -96,6 +97,10 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
             |-- not-found.component.scss
             |-- not-found.component.spec.ts
             |-- not-found.component.ts
+
+
+
+```
 
 
 
