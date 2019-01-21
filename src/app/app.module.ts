@@ -22,7 +22,6 @@ import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
 import { HeroesModule } from './workspace/heroes/heroes.module';
 import { NotFoundComponent } from './workspace/not-found/not-found.component';
-import { CrisisCenterModule } from './workspace/crisis-center/crisis-center.module';
 import { ComposeMessageComponent } from './workspace/compose-message/compose-message.component';
 import { AuthModule } from './workspace/auth/auth.module';
 
@@ -50,7 +49,6 @@ const MOCK_MODULE = environment.envName === 'dev' ? [ DelonMockModule.forRoot({ 
     HttpClientModule,
     NgZorroAntdModule,
     HeroesModule,
-    CrisisCenterModule,
     AuthModule,
     AppRoutingModule,
     ...MOCK_MODULE

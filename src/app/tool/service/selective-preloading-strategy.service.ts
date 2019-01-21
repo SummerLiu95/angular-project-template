@@ -5,7 +5,7 @@ import { Observable, of } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class SelectivePreloadingStrategyService implements PreloadingStrategy{
+export class SelectivePreloadingStrategyService implements PreloadingStrategy {
   preloadModules: string[] = [];
 
   constructor() { }
