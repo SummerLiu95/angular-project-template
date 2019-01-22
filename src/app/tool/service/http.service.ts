@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
@@ -68,10 +68,12 @@ export class HttpService {
 
   /**
    * GET 请求
-   * @param _url|string API接口地址
+   * @param _url|string 请求地址
    * @param _params|ParamsType 参数对象
+   * @param feedback|string 请求的操作含义
+   * @param safeResult|any 请求错误时的返回值
    */
-  Get(_url: string, _params: ParamsType = {}, feeback: string = 'operation', safeResult: any): Observable<HttpResponseType> {
+  Get(_url: string, _params: ParamsType = {}, feedback: string = 'operation', safeResult: any): Observable<HttpResponseType> {
     const URL = environment.baseURL + _url;
     const params = new HttpParams({
       fromObject: _params
@@ -79,17 +81,19 @@ export class HttpService {
     return this.httpClient.get<HttpResponseType>(URL, {
       params
     }).pipe(
-      catchError(this.handleError('', feeback, safeResult))
+      catchError(this.handleError('', feedback, safeResult))
     );
   }
 
   /**
    * 请求主体可以为 urlencoding、JSON、FormData 的 POST 请求
-   * @param _url|string API接口地址 
-   * @param _params|ParamsType 参数对象 
-   * @param contentType|ContentType Post请求body编码格式 
+   * @param _url|string 请求地址
+   * @param _params|ParamsType 参数对象
+   * @param contentType|ContentType Post请求body编码格式
+   * @param feedback|string 请求的操作含义
+   * @param safeResult|any 请求错误时的返回值
    */
-  Post(_url: string, _params: ParamsType, contentType: PostContentType, feeback: string = 'operation', safeResult: any): Observable<HttpResponseType> {
+  Post(_url: string, _params: ParamsType, contentType: PostContentType, feedback: string = 'operation', safeResult: any): Observable<HttpResponseType> {
     let params;
     const URL = environment.baseURL + _url;
     switch (contentType) {
@@ -112,16 +116,18 @@ export class HttpService {
       map((response: HttpResponseType) => {
         return this.responseHandler(response, messageID);
         }),
-      catchError(this.handleError(messageID, feeback, safeResult))
+      catchError(this.handleError(messageID, feedback, safeResult))
     );
   }
 
   /**
    * 请求主体为 JSON 的 PUT 请求
-   * @param _url|string API接口地址
+   * @param _url|string 请求地址
    * @param _params|ParamsType 参数对象
+   * @param feedback|string 请求的操作含义
+   * @param safeResult|any 请求错误时的返回值
    */
-  Put(_url: string, _params: ParamsType, feeback: string = 'operation', safeResult: any): Observable<HttpResponseType> {
+  Put(_url: string, _params: ParamsType, feedback: string = 'operation', safeResult: any): Observable<HttpResponseType> {
     const URL = environment.baseURL + _url;
     const messageID = this.message.loading('更新中...', { nzDuration: 0 }).messageId;
     return this.httpClient.put(URL, _params, {
@@ -130,16 +136,18 @@ export class HttpService {
       map((response: HttpResponseType) => {
         return this.responseHandler(response, messageID);
         }),
-      catchError(this.handleError(messageID, feeback, safeResult))
+      catchError(this.handleError(messageID, feedback, safeResult))
     );
   }
 
   /**
    * DELETE 请求
-   * @param _url|string API接口地址 
-   * @param _params|ParamsType 参数对象 
+   * @param _url|string API接口地址
+   * @param _params|ParamsType 参数对象
+   * @param feedback|string 请求的操作含义
+   * @param safeResult|any 请求错误时的返回值
    */
-  Delete(_url: string, _params: ParamsType, feeback: string = 'operation', safeResult: any): Observable<HttpResponseType> {
+  Delete(_url: string, _params: ParamsType, feedback: string = 'operation', safeResult: any): Observable<HttpResponseType> {
     const URL = environment.baseURL + _url;
     const params = new HttpParams({
       fromObject: _params
@@ -151,7 +159,7 @@ export class HttpService {
       map((response: HttpResponseType) => {
         return this.responseHandler(response, messageID);
         }),
-      catchError(this.handleError(messageID, feeback, safeResult))
+      catchError(this.handleError(messageID, feedback, safeResult))
     );
   }
 
