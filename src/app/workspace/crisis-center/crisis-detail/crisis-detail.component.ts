@@ -37,16 +37,16 @@ export class CrisisDetailComponent implements OnInit, CanComponentDeactivate {
     return this.dialogService.confirm();
   }
 
-  cancel() {
+  cancel(): void {
     this.gotoCrises();
   }
 
-  save() {
+  save(): void {
     this.crisis.name = this.editName;
     this.gotoCrises();
   }
 
-  private gotoCrises() {
+  private gotoCrises(): void {
     const crisisId = this.crisis ? this.crisis.id : null;
     // Pass along the crisis id if available
     // so that the CrisisListComponent can select that crisis.

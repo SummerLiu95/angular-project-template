@@ -16,7 +16,7 @@ export class ComposeMessageComponent implements OnInit {
   ngOnInit() {
   }
 
-  send() {
+  send(): void {
     this.sending = true;
     this.details = 'Sending Message...';
 
@@ -26,11 +26,11 @@ export class ComposeMessageComponent implements OnInit {
     }, 1000);
   }
 
-  cancel() {
+  cancel(): void {
     this.closePopup();
   }
 
-  closePopup() {
+  closePopup(): void {
     // Providing a `null` value to the named outlet
     // clears the contents of the named outlet
     this.router.navigate([{ outlets: { popup: null }}]);

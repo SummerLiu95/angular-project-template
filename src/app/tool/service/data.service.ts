@@ -22,7 +22,7 @@ export class DataService {
   }
 
 
-  getHeroes(): Observable<any> {
+  getHeroes(): Observable<Hero[]> {
     return this.http.Get(API.heroes, {}, '请求英雄列表数据', {data: {list: []}})
       .pipe(map((res: HttpResponseType<TableListResponseType>) => {
         // 如果不使用 map 操作符，将返回 Observable<HttpResponseType>，因此这里需要将对应的字段值取出来
@@ -36,7 +36,7 @@ export class DataService {
     );
   }
 
-  getCrises(): Observable<any> {
+  getCrises(): Observable<Crisis[]> {
     return this.http.Get(API.crises, {}, '请求危机列表数据', {data: { list: []}})
       .pipe(map((res: HttpResponseType<TableListResponseType>) => {
         return res.data.list;
