@@ -78,7 +78,7 @@ export class HttpService {
     const params = new HttpParams({
       fromObject: _params
     });
-    return this.httpClient.get<HttpResponseType>(URL, {
+    return this.httpClient.get(URL, {
       params
     }).pipe(
       catchError(this.handleError('', feedback, safeResult))
@@ -94,23 +94,10 @@ export class HttpService {
    * @param safeResult|any 请求错误时的返回值
    */
   Post(_url: string, _params: ParamsType, contentType: PostContentType, feedback: string = 'operation', safeResult: any): Observable<HttpResponseType> {
-    let params;
     const URL = environment.baseURL + _url;
-    switch (contentType) {
-      case 0:
-        params = new HttpParams({
-          fromObject: _params
-        });
-        break;
-      case 1:
-        params = _params;
-        break;
-      case 2:
-        params = this.toFormData(_params);
-        break;
-    }
+    const contentTypeArray = [new HttpParams({fromObject: _params}), _params, this.toFormData(_params)];
     const messageID = this.message.loading('添加中...', { nzDuration: 0 }).messageId;
-    return this.httpClient.post(URL, params, {
+    return this.httpClient.post(URL, contentTypeArray[contentType], {
       
     }).pipe(
       map((response: HttpResponseType) => {
@@ -153,7 +140,7 @@ export class HttpService {
       fromObject: _params
     });
     const messageID = this.message.loading('删除中...', { nzDuration: 0 }).messageId;
-    return this.httpClient.put(URL, {
+    return this.httpClient.delete(URL, {
       params
     }).pipe(
       map((response: HttpResponseType) => {
