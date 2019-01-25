@@ -5,9 +5,7 @@ import { EMPTY, Observable, of } from 'rxjs';
 import { DataService } from '../../tool/service/data.service';
 import { mergeMap, take } from 'rxjs/operators';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class CrisisDetailResolverService implements Resolve<Crisis> {
 
   constructor(

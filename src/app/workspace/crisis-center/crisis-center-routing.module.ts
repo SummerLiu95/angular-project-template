@@ -36,6 +36,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [CrisisDetailResolverService]
 })
 export class CrisisCenterRoutingModule { }
