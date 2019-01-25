@@ -4,8 +4,6 @@ import { Hero } from '../../../tool/type/heroes';
 import { DataService } from '../../../tool/service/data.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
-import { HttpResponseType } from '../../../tool/service/http.service';
-import { TableListResponseType } from '../../../tool/type/types';
 
 @Component({
   selector: 'app-hero-list',
@@ -13,7 +11,7 @@ import { TableListResponseType } from '../../../tool/type/types';
   styleUrls: ['./hero-list.component.scss']
 })
 export class HeroListComponent implements OnInit {
-  heroes$: Observable<HttpResponseType<TableListResponseType<Hero>>>;
+  heroes$: Observable<Hero[]>;
   selectedId: number;
 
   constructor(
