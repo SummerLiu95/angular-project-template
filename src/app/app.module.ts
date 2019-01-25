@@ -8,7 +8,6 @@ import { Router } from '@angular/router';
 
 // 业务开发模块导入
 import { AppRoutingModule } from './app-routing.module';
-import { ToolModule } from './tool/tool.module';
 import { NgZorroAntdModule, NZ_I18N, zh_CN, NZ_ICONS } from 'ng-zorro-antd';
 import { IconDefinition } from '@ant-design/icons-angular';
 import * as AllIcons from '@ant-design/icons-angular/icons';
@@ -43,7 +42,6 @@ const MOCK_MODULE = environment.envName === 'dev' ? [ DelonMockModule.forRoot({ 
   ],
   imports: [
     BrowserModule,
-    ToolModule,
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
