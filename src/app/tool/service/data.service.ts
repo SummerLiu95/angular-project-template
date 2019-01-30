@@ -18,7 +18,7 @@ export class DataService {
     private http: HttpService,
     private httpErrorHandler: HttpErrorHandlerService
   ) {
-    this.handleError = httpErrorHandler.createErrorHandler('DataService');
+    this.handleError = this.httpErrorHandler.createErrorHandler('DataService');
   }
 
 
