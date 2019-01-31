@@ -69,6 +69,14 @@
                   "with": "src/environments/environment.staging.ts"
                 }
               ]
+            },
+            "hmr": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.hmr.ts"
+                }
+              ]
             }
           }
         },
@@ -83,6 +91,10 @@
             },
             "staging": {
               "browserTarget": "front-end-project-standard-demo:build:staging"
+            },
+            "hmr": {
+              "hmr": true,
+              "browserTarget": "front-end-project-standard-demo:build:hmr"
             }
           }
         },
