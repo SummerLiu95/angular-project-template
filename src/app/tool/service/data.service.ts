@@ -8,6 +8,14 @@ import { map } from 'rxjs/operators';
 import { Hero } from '../type/heroes';
 import { Crisis } from '../type/crisis-center';
 
+const safeResultList = {
+  code: 0,
+  msg: '',
+  data: {
+    list: []
+  }
+};
+
 @Injectable({
   providedIn: 'root'
 })
@@ -23,7 +31,7 @@ export class DataService {
 
 
   getHeroes(): Observable<Hero[]> {
-    return this.http.Get(API.heroes, {}, '请求英雄列表数据', {data: {list: []}})
+    return this.http.Get(API.heroes, {}, safeResultList, '请求英雄列表数据')
       .pipe(map((res: HttpResponseType<TableListResponseType>) => {
         // 如果不使用 map 操作符，将返回 Observable<HttpResponseType>，因此这里需要将对应的字段值取出来
         return res.data.list;
@@ -37,7 +45,7 @@ export class DataService {
   }
 
   getCrises(): Observable<Crisis[]> {
-    return this.http.Get(API.crises, {}, '请求危机列表数据', {data: { list: []}})
+    return this.http.Get(API.crises, {}, safeResultList, '请求危机列表数据')
       .pipe(map((res: HttpResponseType<TableListResponseType>) => {
         return res.data.list;
       }));
