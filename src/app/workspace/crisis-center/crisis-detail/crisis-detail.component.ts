@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { CanComponentDeactivate } from '../../../tool/can-deactivate.guard';
+import { CanComponentDeactivate } from '../../../shared/can-deactivate.guard';
 import { Observable } from 'rxjs';
-import { Crisis } from '../../../tool/type/crisis-center';
-import {ActivatedRoute, Router} from '@angular/router';
-import {DialogService} from '../../../tool/service/dialog.service';
+import { Crisis } from '../../../shared/type/crisis-center';
+import { ActivatedRoute, Router } from '@angular/router';
+import { DialogService } from '../../../shared/service/dialog.service';
 
 @Component({
   selector: 'app-crisis-detail',

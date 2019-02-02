@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Crisis } from '../../../tool/type/crisis-center';
+import { Crisis } from '../../../shared/type/crisis-center';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
-import { DataService } from '../../../tool/service/data.service';
+import { DataService } from '../../../shared/service/data.service';
 
 @Component({
   selector: 'app-crisis-list',

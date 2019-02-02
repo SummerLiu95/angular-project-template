@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Hero } from '../../../tool/type/heroes';
-import { DataService } from '../../../tool/service/data.service';
+import { Hero } from '../../../shared/type/heroes';
+import { DataService } from '../../../shared/service/data.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 

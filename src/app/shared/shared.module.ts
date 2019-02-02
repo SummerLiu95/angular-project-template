@@ -9,4 +9,4 @@ import { CommonModule } from '@angular/common';
   exports: [],
   entryComponents: []
 })
-export class ToolModule { }
+export class SharedModule { }

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Hero } from '../../../tool/type/heroes';
+import { Hero } from '../../../shared/type/heroes';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
-import { DataService } from '../../../tool/service/data.service';
+import { DataService } from '../../../shared/service/data.service';
 
 @Component({
   selector: 'app-hero-detail',
