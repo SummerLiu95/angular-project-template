@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "front-end-project-standard-demo": {
+    "angular-project-template": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/front-end-project-standard-demo",
+            "outputPath": "dist/angular-project-template",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -83,25 +83,25 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "front-end-project-standard-demo:build"
+            "browserTarget": "angular-project-template:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "front-end-project-standard-demo:build:production"
+              "browserTarget": "angular-project-template:build:production"
             },
             "staging": {
-              "browserTarget": "front-end-project-standard-demo:build:staging"
+              "browserTarget": "angular-project-template:build:staging"
             },
             "hmr": {
               "hmr": true,
-              "browserTarget": "front-end-project-standard-demo:build:hmr"
+              "browserTarget": "angular-project-template:build:hmr"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "front-end-project-standard-demo:build"
+            "browserTarget": "angular-project-template:build"
           }
         },
         "test": {
@@ -136,7 +136,7 @@
         }
       }
     },
-    "front-end-project-standard-demo-e2e": {
+    "angular-project-template-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "prefix": "",
@@ -145,11 +145,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "front-end-project-standard-demo:serve"
+            "devServerTarget": "angular-project-template:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "front-end-project-standard-demo:serve:production"
+              "devServerTarget": "angular-project-template:serve:production"
             }
           }
         },
@@ -165,5 +165,5 @@
       }
     }
   },
-  "defaultProject": "front-end-project-standard-demo"
+  "defaultProject": "angular-project-template"
 }
