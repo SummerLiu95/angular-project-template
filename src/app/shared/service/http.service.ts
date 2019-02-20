@@ -36,6 +36,8 @@ interface ParamsType  {
 })
 export class HttpService {
   private handleError: HandleError;
+  URLPattern = new RegExp(/^((ht|f)tps?):\/\/[\w\-]+(\.[\w\-]+)+([\w\-.,@?^=%&:\/~+#]*[\w\-@?^=%&\/~+#])?$/);
+
 
   constructor(
     private message: NzMessageService,
@@ -73,8 +75,8 @@ export class HttpService {
    * @param safeResponse|HttpResponseType 请求错误时的返回值
    * @param errorSource|string 引起错误的操作来源
    */
-  Get(_url: string, _params: ParamsType = {}, safeResponse: HttpResponseType, errorSource: string = '', ): Observable<HttpResponseType> {
-    const URL = environment.baseURL + _url;
+  Get(_url: string, _params: ParamsType = {}, safeResponse: HttpResponseType, errorSource: string = ''): Observable<HttpResponseType> {
+    const URL = this.URLPattern.test(_url) ? _url : environment.baseURL + _url;
     const params = new HttpParams({
       fromObject: _params
     });
@@ -97,7 +99,7 @@ export class HttpService {
    */
   Post(_url: string, _params: ParamsType, contentType: PostContentType, safeResponse: HttpResponseType,
        userNotification: boolean = true, errorSource: string = ''): Observable<HttpResponseType> {
-    const URL = environment.baseURL + _url;
+    const URL = this.URLPattern.test(_url) ? _url : environment.baseURL + _url;
     const contentTypeArray = [new HttpParams({fromObject: _params}), _params, this.toFormData(_params)];
     let messageID = '';
     if (userNotification) {
@@ -123,7 +125,7 @@ export class HttpService {
    */
   Put(_url: string, _params: ParamsType, safeResponse: HttpResponseType, userNotification: boolean = true,
       errorSource: string = ''): Observable<HttpResponseType> {
-    const URL = environment.baseURL + _url;
+    const URL = this.URLPattern.test(_url) ? _url : environment.baseURL + _url;
     let messageID = '';
     if (userNotification) {
       messageID = this.message.loading('更新中...', { nzDuration: 0 }).messageId;
@@ -148,7 +150,7 @@ export class HttpService {
    */
   Delete(_url: string, _params: ParamsType, safeResponse: HttpResponseType, userNotification: boolean = true,
          errorSource: string = ''): Observable<HttpResponseType> {
-    const URL = environment.baseURL + _url;
+    const URL = this.URLPattern.test(_url) ? _url : environment.baseURL + _url;
     const params = new HttpParams({
       fromObject: _params
     });
