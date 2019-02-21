@@ -1,4 +1,4 @@
-# FrontEndProjectStandardDemo
+# AngularProjectTemplate
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.2.2.
 
@@ -17,7 +17,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
     |-- mock
     |   |-- index.ts
     |   |-- mock-data.ts
-    |-- tool
+    |-- shared
     |   |-- api.ts
     |   |-- can-deactivate.guard.ts
     |   |-- shared.module.ts
@@ -104,7 +104,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 
 
-如上图所示，项目源代码目录 `src/app` 下有个根模块 AppModule，同时该根模块还拥有 $(n+1)$ 个子模块 SharedModule 工具模块和 $n$ 个业务模块。其中 SharedModule 模块提供项目其他 $n$ 个业务模块所需用到的自定义组件、动画、指令、管道等，同时需要注意的是将 SharedModule 的 `exports` 属性将对应可声明对象（组件、指令、管道）声明出去，供项目其余的 $n$ 个业务模块使用。而业务模块主要根据业务功能分模块，同时业务的路由配置也写在模块内，特别是当一个业务模块有子页面时，则模块内可根据子页面再进行细分，如上图中的 crisis-center、heroes模块。同时业务模块中的登录模块，404模块的路由配置在根模块这一级别。
+如上图所示，项目源代码目录 `src/app` 下有个根模块 AppModule，同时该根模块还拥有 $(n+1)$ 个子模块 SharedModule 工具模块和 $n$ 个业务模块。其中 SharedModule 模块提供项目其他 $n$ 个业务模块所需用到的自定义组件、动画、指令、管道等，同时需要注意的是将 SharedModule 的 `exports` 属性将对应可声明对象（组件、指令、管道）声明出去，供项目其余的 $n$ 个业务模块使用。而业务模块主要根据业务功能分模块，同时业务的路由配置也写在模块内，特别是当一个业务模块有子页面时，则模块内可根据子页面再进行细分，如上图中的 crisis-center、heroes 模块。同时业务模块中的登录模块，404模块的路由配置在根模块这一级别。
 
 而 `app/mock` 目录下则为开发过程中 mock 数据接口的相关文件：`index.ts` 以及 `mock-data.ts`。其中 `index.ts` 中编写项目所使用的第三方库 @delon/mock 的 mock 数据的逻辑代码，而 `mock-data.ts` 中则使用第三方库 mockjs 去编写对应接口返回的数据。具体可查看代码进行理解。
 
@@ -130,6 +130,9 @@ npm run staging
 
 # 打包开发环境代码
 npm run dev
+
+# 以热替换方式开启本地开发环境
+npm run hmr
 ```
 
 
@@ -210,5 +213,14 @@ npm run dev
 
 
 
+## 接口字段规范
 
+这里讨论的规范主要指 HTTP 响应码和响应主体中 code 字段两者该如何使用的问题，参考 [前后端分离项目，接口返回200但是里面返回500合理吗？|知乎](https://www.zhihu.com/question/309888255) 讨论的问题。
+
+在本代码模板中封装的 HTTP 错误处理中有一个机制——当 HTTP 响应发生错误时会返回一个默认空值以解决在浏览器控制台显示如下的报错信息：
+
+> ERROR TypeError: Cannot read property 'xxx' of undefined
+
+如果某个未带上业务所需信息的 HTTP 请求所返回的响应码为 200，但在响应报文主体数据的 code 字段返回内部自行规定的状态码，同时 data 字段为空对象。则会让代码模板中 HTTP 请求错误机制失效，因此我们建议 HTTP 响应状态一切按 HTTP 语义，即在响应报文的响应行指明对应的状态码。我们支持上文知乎讨论贴中的这个[回答](
+https://www.zhihu.com/question/309888255/answer/588022856)。
 
