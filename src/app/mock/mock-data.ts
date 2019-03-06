@@ -1,7 +1,6 @@
 import * as Mock from 'mockjs';
 
 export const heroes = Mock.mock({
-  'code': '@integer(0,5)',
   'msg': '@sentence(0, 9)',
   'data': {
     'total': 40,
@@ -23,7 +22,6 @@ export const heroes = Mock.mock({
 });
 
 export const crises = Mock.mock({
-  'code': '@integer(0,5)',
   'msg': '@sentence(0, 9)',
   'data': {
     'total': 40,

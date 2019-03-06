@@ -8,7 +8,6 @@ import { HandleError, HttpErrorHandlerService } from './http-error-handler.servi
 
 // http 响应体类型
 export interface HttpResponseType<T = any> {
-  code: number;
   msg: string;
   data: T;
 }
@@ -175,13 +174,7 @@ export class HttpService {
    */
   private responseHandler(response: HttpResponseType, messageID: string): HttpResponseType {
     this.message.remove(messageID);
-    if (response.code === StateCode.ok) {
-      // 请求成功
-      this.message.success(response.msg);
-    } else {
-      // 请求异常以外的非成功状态码，如状态码 3XX
-      this.message.warning(response.msg);
-    }
+    this.message.success(response.msg);
     return response;
   }
 }

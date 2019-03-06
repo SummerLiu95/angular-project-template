@@ -11,7 +11,6 @@ export default {
 
   'POST test/update': (req) => {
     return {
-      code: 200,
       msg: 'SUCCESS',
       data: null
     };

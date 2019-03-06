@@ -9,7 +9,6 @@ import { Hero } from '../model/heroes';
 import { Crisis } from '../model/crisis-center';
 
 const safeResultList = {
-  code: 0,
   msg: '',
   data: {
     list: []
