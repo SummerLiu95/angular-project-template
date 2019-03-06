@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpResponseType, HttpService } from './http.service';
 import { API } from '../api';
 import { Observable } from 'rxjs';
-import { TableListResponseType } from '../type/types';
+import { TableListResponseType } from '../model/types';
 import { HandleError, HttpErrorHandlerService } from './http-error-handler.service';
 import { map } from 'rxjs/operators';
-import { Hero } from '../type/heroes';
-import { Crisis } from '../type/crisis-center';
+import { Hero } from '../model/heroes';
+import { Crisis } from '../model/crisis-center';
 
 const safeResultList = {
   code: 0,

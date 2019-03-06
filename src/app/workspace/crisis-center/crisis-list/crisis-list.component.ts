@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Crisis } from '../../../shared/type/crisis-center';
+import { Crisis } from '../../../shared/model/crisis-center';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { DataService } from '../../../shared/service/data.service';

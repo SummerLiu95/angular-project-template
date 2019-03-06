@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from '@angular/router';
-import { Crisis } from '../../shared/type/crisis-center';
+import { Crisis } from '../../shared/model/crisis-center';
 import { EMPTY, Observable, of } from 'rxjs';
 import { DataService } from '../../shared/service/data.service';
 import { mergeMap, take } from 'rxjs/operators';
